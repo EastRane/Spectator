@@ -6,6 +6,7 @@ import de.cuzim1tigaaa.spectator.cycle.CycleTask;
 import de.cuzim1tigaaa.spectator.files.*;
 import de.cuzim1tigaaa.spectator.spectate.SpectateUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
@@ -65,6 +66,7 @@ public class SpectateCycle implements CommandExecutor, TabCompleter {
             case "stop" -> {
                 if(!hasPermissions(sender, COMMAND_SPECTATE_GENERAL, COMMAND_SPECTATE_OTHERS, COMMAND_SPECTATE_HERE)) {
                     spectateUtils.Unspectate(player, true);
+                    player.setGameMode(GameMode.SPECTATOR);
                     return true;
                 }
 
