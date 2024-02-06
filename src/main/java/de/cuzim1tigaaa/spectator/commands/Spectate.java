@@ -78,6 +78,16 @@ public class Spectate implements CommandExecutor, TabCompleter {
         }
 
         if(!hasPermission(player, COMMAND_SPECTATE_GENERAL)) {
+            if (args.length == 1 && hasPermission(player, COMMAND_SPECTATE_OTHERS)) {
+                Player target = Bukkit.getPlayer(args[0]);
+                if(target == null) {
+                    sender.sendMessage(getMessage(sender, Paths.MESSAGES_GENERAL_OFFLINEPLAYER, "TARGET", args[0]));
+                    return true;
+                }
+                spectateUtils.Spectate(player, target);
+                player.sendMessage(getMessage(player, Paths.MESSAGES_COMMANDS_SPECTATE_PLAYER, "TARGET", target.getName()));
+                return true;
+            }
             player.sendMessage(getMessage(player, Paths.MESSAGE_DEFAULT_PERMISSION));
             return true;
         }
